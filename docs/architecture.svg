@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1400" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#667085"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2496ED"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1000" height="1400" fill="#F7F8FA"/>
+
+  <!-- Title -->
+  <text x="500" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#1F2430">Arquitetura do Projeto — Deploy Automatizado na AWS</text>
+  <text x="500" y="66" text-anchor="middle" font-size="14" fill="#667085" font-style="italic">Spring Boot  →  Docker  →  Terraform  →  AWS EC2</text>
+
+  <!-- ===================== BOX 1: Source ===================== -->
+  <g>
+    <rect x="220" y="100" width="560" height="80" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="100" width="6" height="80" fill="#6DB33F"/>
+    <text x="250" y="130" font-size="16" font-weight="700" fill="#1F2430">Código-fonte da Aplicação</text>
+    <text x="250" y="150" font-size="13" fill="#475467">Java 17 · Spring Boot</text>
+    <text x="250" y="168" font-size="13" fill="#475467">src/main/java/oliveira/carlos/deploy</text>
+  </g>
+  <line x1="500" y1="180" x2="500" y2="220" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===================== BOX 2: Maven build ===================== -->
+  <g>
+    <rect x="220" y="220" width="560" height="80" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="220" width="6" height="80" fill="#6DB33F"/>
+    <text x="250" y="250" font-size="16" font-weight="700" fill="#1F2430">Build com Maven</text>
+    <text x="250" y="270" font-size="13" fill="#475467">./mvnw clean package</text>
+    <text x="250" y="288" font-size="13" fill="#475467">gera deploy-0.0.1-SNAPSHOT.jar</text>
+  </g>
+  <line x1="500" y1="300" x2="500" y2="340" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="515" y="325" font-size="12" fill="#667085">empacota</text>
+
+  <!-- ===================== BOX 3: Dockerfile ===================== -->
+  <g>
+    <rect x="220" y="340" width="560" height="90" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="340" width="6" height="90" fill="#2496ED"/>
+    <text x="250" y="370" font-size="16" font-weight="700" fill="#1F2430">Dockerfile</text>
+    <text x="250" y="390" font-size="13" fill="#475467">FROM eclipse-temurin:17-jre</text>
+    <text x="250" y="408" font-size="13" fill="#475467">COPY app.jar  ·  EXPOSE 8080</text>
+  </g>
+  <line x1="500" y1="430" x2="500" y2="470" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="515" y="455" font-size="12" fill="#667085">build &amp; push</text>
+
+  <!-- ===================== BOX 4: Docker Hub ===================== -->
+  <g>
+    <rect x="220" y="470" width="560" height="90" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="470" width="6" height="90" fill="#2496ED"/>
+    <text x="250" y="500" font-size="16" font-weight="700" fill="#1F2430">Imagem Docker publicada</text>
+    <text x="250" y="520" font-size="13" fill="#475467">docker build  →  docker push</text>
+    <text x="250" y="538" font-size="13" fill="#2496ED" font-weight="600">Docker Hub: darkandie/public-api:latest</text>
+  </g>
+  <line x1="500" y1="560" x2="500" y2="600" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===================== BOX 5: Terraform ===================== -->
+  <g>
+    <rect x="220" y="600" width="560" height="80" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="600" width="6" height="80" fill="#7B42BC"/>
+    <text x="250" y="630" font-size="16" font-weight="700" fill="#1F2430">Terraform — Infraestrutura como Código</text>
+    <text x="250" y="650" font-size="13" fill="#475467">infra/main.tf  ·  terraform apply</text>
+    <text x="250" y="668" font-size="13" fill="#475467">provider aws · região sa-east-1</text>
+  </g>
+  <line x1="500" y1="680" x2="500" y2="720" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="515" y="705" font-size="12" fill="#667085">provisiona</text>
+
+  <!-- ===================== BOX 6: AWS outer ===================== -->
+  <g>
+    <rect x="220" y="720" width="560" height="360" rx="14" fill="#FFF8EE" stroke="#FF9900" stroke-width="2"/>
+    <text x="250" y="750" font-size="15" font-weight="700" fill="#B54708">☁ AWS Cloud — sa-east-1</text>
+
+    <!-- Security Group -->
+    <rect x="250" y="765" width="500" height="60" rx="10" fill="#FFFFFF" stroke="#EAECF0"/>
+    <text x="270" y="788" font-size="14" font-weight="700" fill="#1F2430">Security Group</text>
+    <text x="270" y="806" font-size="12" fill="#475467">libera portas 22 (SSH) e 80 (HTTP) para 0.0.0.0/0</text>
+
+    <!-- Key Pair -->
+    <rect x="250" y="835" width="500" height="55" rx="10" fill="#FFFFFF" stroke="#EAECF0"/>
+    <text x="270" y="858" font-size="14" font-weight="700" fill="#1F2430">Key Pair</text>
+    <text x="270" y="876" font-size="12" fill="#475467">acesso SSH via chave pública (~/keys/AWS.pub)</text>
+
+    <!-- EC2 -->
+    <rect x="250" y="900" width="500" height="150" rx="10" fill="#FFFFFF" stroke="#EAECF0"/>
+    <text x="270" y="924" font-size="14" font-weight="700" fill="#1F2430">Instância EC2 (t2.nano)</text>
+    <text x="270" y="944" font-size="12" fill="#475467">executa infra/user_data.sh no boot:</text>
+    <text x="285" y="964" font-size="12" fill="#475467">1. yum install -y docker</text>
+    <text x="285" y="982" font-size="12" fill="#475467">2. systemctl enable --now docker</text>
+    <text x="285" y="1000" font-size="12" fill="#475467">3. docker run -d -p 80:8080 darkandie/public-api:latest</text>
+    <text x="270" y="1030" font-size="12" fill="#2496ED" font-weight="600">imagem obtida via docker pull (Docker Hub)</text>
+  </g>
+
+  <!-- dashed side arrow from Docker Hub box (4) to EC2 box -->
+  <path d="M780,515 C 900,515 940,700 940,900 C 940,955 830,970 752,975"
+        fill="none" stroke="#2496ED" stroke-width="2" stroke-dasharray="6,5" marker-end="url(#arrowBlue)"/>
+  <rect x="878" y="655" width="110" height="40" rx="6" fill="#F7F8FA" stroke="#2496ED" stroke-dasharray="3,3"/>
+  <text x="933" y="672" text-anchor="middle" font-size="11" fill="#2496ED">docker pull</text>
+  <text x="933" y="686" text-anchor="middle" font-size="11" fill="#2496ED">no boot</text>
+
+  <line x1="500" y1="1080" x2="500" y2="1120" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="515" y="1105" font-size="12" fill="#667085">porta 80 (HTTP)</text>
+
+  <!-- ===================== BOX 7: Client ===================== -->
+  <g>
+    <rect x="220" y="1120" width="560" height="70" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="1120" width="6" height="70" fill="#344054"/>
+    <text x="250" y="1150" font-size="16" font-weight="700" fill="#1F2430">Cliente / Navegador</text>
+    <text x="250" y="1170" font-size="13" fill="#475467">HTTP GET http://&lt;ip-publico-da-ec2&gt;/</text>
+  </g>
+  <line x1="500" y1="1190" x2="500" y2="1230" stroke="#667085" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="515" y="1215" font-size="12" fill="#667085">resposta</text>
+
+  <!-- ===================== BOX 8: Response ===================== -->
+  <g>
+    <rect x="220" y="1230" width="560" height="80" rx="12" fill="#FFFFFF" stroke="#D0D5DD"/>
+    <rect x="220" y="1230" width="6" height="80" fill="#0F9D9D"/>
+    <text x="250" y="1260" font-size="16" font-weight="700" fill="#1F2430">Resposta da API (JSON)</text>
+    <text x="250" y="1282" font-size="13" font-family="monospace" fill="#0F9D9D">{ "timestamp": "2026-07-09T12:34:56Z" }</text>
+  </g>
+
+  <!-- Footer legend -->
+  <g font-size="12" fill="#667085">
+    <rect x="220" y="1340" width="14" height="14" fill="#6DB33F"/>
+    <text x="240" y="1351">Aplicação (Java/Spring)</text>
+    <rect x="420" y="1340" width="14" height="14" fill="#2496ED"/>
+    <text x="440" y="1351">Docker</text>
+    <rect x="540" y="1340" width="14" height="14" fill="#7B42BC"/>
+    <text x="560" y="1351">Terraform</text>
+    <rect x="660" y="1340" width="14" height="14" fill="#FF9900"/>
+    <text x="680" y="1351">AWS</text>
+    <rect x="750" y="1340" width="14" height="14" fill="#0F9D9D"/>
+    <text x="770" y="1351">Cliente / Resposta</text>
+  </g>
+</svg>
